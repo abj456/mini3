@@ -189,12 +189,14 @@ public:
 		return true;
 	}
 	int evaluation(Point p) {
-		int eval = next_valid_spts.size();
+		int eval = 0;
 		if (disc_count[EMPTY] > 40) {
+			eval = (disc_count[myturn] - disc_count[enemyturn])*(-1);
 			if (p == x1 || p == x2 || p == x3 || p == x4)eval += -20;
 			if (p == c1 || p == c2 || p == c3 || p == c4 || p == c5 || p == c6 || p == c7 || p == c8)eval += -10;
 		}
 		else if (disc_count[EMPTY] <= 43) {
+			eval = next_valid_spts.size();
 			if (p == x1 || p == x2 || p == x3 || p == x4)eval += 10;
 			if (p == c1 || p == c2 || p == c3 || p == c4 || p == c5 || p == c6 || p == c7 || p == c8)eval += 7;
 		}
