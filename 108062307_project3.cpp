@@ -190,8 +190,14 @@ public:
 	}
 	int evaluation(Point p) {
 		int eval = next_valid_spts.size();
-		if (p == x1 || p == x2 || p == x3 || p == x4)eval += -20;
-		if (p == c1 || p == c2 || p == c3 || p == c4 || p == c5 || p == c6 || p == c7 || p == c8)eval += -10;
+		if (disc_count[EMPTY] > 40) {
+			if (p == x1 || p == x2 || p == x3 || p == x4)eval += -20;
+			if (p == c1 || p == c2 || p == c3 || p == c4 || p == c5 || p == c6 || p == c7 || p == c8)eval += -10;
+		}
+		else if (disc_count[EMPTY] <= 43) {
+			if (p == x1 || p == x2 || p == x3 || p == x4)eval += 10;
+			if (p == c1 || p == c2 || p == c3 || p == c4 || p == c5 || p == c6 || p == c7 || p == c8)eval += 7;
+		}
 		return eval;
 	}
 	
@@ -226,14 +232,14 @@ public:
 			//	cout << "Point p = " << p.x << ' ' << p.y << endl;
 				Gamestate tempgame = Gamestate(gameboard, now_player, dep, alpha, beta);
 				tempgame.put_disc(p);
-				for (int i = 0; i < SIZE; i++) {
+			/*	for (int i = 0; i < SIZE; i++) {
 					for (int j = 0; j < SIZE; j++) {
 						if (tempgame.gameboard[i][j] == EMPTY)cout << '-';
 						else if (tempgame.gameboard[i][j] == BLACK)cout << 'O';
 						else if (tempgame.gameboard[i][j] == WHITE)cout << 'X';
 					}
 					cout << endl;
-				}
+				}*/
 				tempgame.next_valid_spts = tempgame.get_valid_spots();
 			//	cout << tempgame.next_valid_spts.size() << endl;
 				for (Point tp : tempgame.next_valid_spts) {
