@@ -200,7 +200,7 @@ public:
 			return evaluation(p);
 		else {
 			if (now_player == myturn) {
-				cout << "Point p = " << p.x << ' ' << p.y << endl;
+			//	cout << "Point p = " << p.x << ' ' << p.y << endl;
 				Gamestate tempgame = Gamestate(gameboard, now_player, dep, alpha, beta);
 				tempgame.put_disc(p);
 			/*	for (int i = 0; i < SIZE; i++) {
@@ -226,7 +226,14 @@ public:
 			//	cout << "Point p = " << p.x << ' ' << p.y << endl;
 				Gamestate tempgame = Gamestate(gameboard, now_player, dep, alpha, beta);
 				tempgame.put_disc(p);
-			
+				for (int i = 0; i < SIZE; i++) {
+					for (int j = 0; j < SIZE; j++) {
+						if (tempgame.gameboard[i][j] == EMPTY)cout << '-';
+						else if (tempgame.gameboard[i][j] == BLACK)cout << 'O';
+						else if (tempgame.gameboard[i][j] == WHITE)cout << 'X';
+					}
+					cout << endl;
+				}
 				tempgame.next_valid_spts = tempgame.get_valid_spots();
 			//	cout << tempgame.next_valid_spts.size() << endl;
 				for (Point tp : tempgame.next_valid_spts) {
